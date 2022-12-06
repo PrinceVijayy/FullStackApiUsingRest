@@ -1,0 +1,19 @@
+package com.ojas.rest;
+
+import javax.websocket.server.PathParam;
+import javax.ws.rs.Path;
+
+import com.ojas.dao.CredentialDAO;
+import com.ojas.dao.CredentialDAOImpl;
+import com.ojas.model.Credential;
+
+@Path("/credential")
+public class CredentialService {
+		CredentialDAO dao=new CredentialDAOImpl();
+		
+		@Path("/create/{type}/{firstName}/{lastName}/{username}/{email}/{password}")
+		public String createCredential(@PathParam("type")String type,@PathParam("firstName") String firstName,@PathParam("lastName") String lastName,@PathParam("username") String username,@PathParam("email") String email,@PathParam("password") String password) {
+			Credential cred=new Credential(type, firstName, lastName, username, email, password);
+			return dao.createCredentials(cred);
+		}
+}

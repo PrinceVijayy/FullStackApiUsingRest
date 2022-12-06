@@ -1,0 +1,47 @@
+package com.ojas.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "CREDENTIALS")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Credential {
+
+	@Id
+	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	public int id;
+	@Column(name = "TYPE")
+	public String type;
+	@Column(name = "FIRST_NAME")
+	public String firstName;
+	@Column(name = "LAST_NAME")
+	public String lastName;
+	@Column(name = "USERNAME")
+	public String userName;
+	@Column(name = "EMAIL")
+	public String email;
+	@Column(name = "PASSWORD")
+	public String password;
+	public Credential(String type, String firstName, String lastName, String userName, String email, String password) {
+		super();
+		this.type = type;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName = userName;
+		this.email = email;
+		this.password = password;
+	}
+
+}

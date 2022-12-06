@@ -1,0 +1,14 @@
+package com.ojas.dao;
+
+import java.util.List;
+
+import com.ojas.model.Credential;
+
+public interface CredentialDAO {
+	
+	public String createCredentials(Credential credentials);
+	public String updateCredentials(int id, Credential credentials);
+	public String deleteCredentials(int id);
+	public Credential viewCredential(int id);
+	public List<Credential> viewAllCredentials();
+}

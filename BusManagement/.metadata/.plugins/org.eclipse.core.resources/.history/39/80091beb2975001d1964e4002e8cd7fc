@@ -1,0 +1,17 @@
+package com.ojas.rest;
+
+import javax.ws.rs.Path;
+
+import com.ojas.dao.CredentialDAO;
+import com.ojas.dao.CredentialDAOImpl;
+import com.ojas.model.Credential;
+
+@Path("/credential")
+public class CredentialService {
+		CredentialDAO dao=new CredentialDAOImpl();
+		
+		@Path(/create/{type}/{firstName}/{lastName}/{username})
+		public String createCredential(String type, String firstName,String lastName, String username,String email, String password) {
+			Credential cred=new Credential(type, firstName, lastName, username, email, password);
+			return dao.createCredentials(cred);
+}

@@ -1,0 +1,39 @@
+package com.ojas.dao;
+
+import java.util.List;
+
+import com.ojas.model.Credential;
+
+public class CredentialDAOImpl implements CredentialDAO {
+
+	@Override
+	public String createCredentials(Credential credentials) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String updateCredentials(int id, Credential credentials) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String deleteCredentials(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Credential viewCredential(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Credential> viewAllCredentials() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,193 @@
+package com.ojas.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
+import com.ojas.model.Credential;
+
+public class CredentialDAOImpl implements CredentialDAO {
+
+	String message;
+
+	@Override
+	public String createCredentials(Credential credential) {
+		// Configuration start
+
+		Configuration configure = new Configuration();
+
+		configure.configure();
+
+		SessionFactory sessionFactory = configure.buildSessionFactory();
+
+		Session session = sessionFactory.openSession();
+
+		// write your Logic
+		Credential cred = session.get(Credential.class, credential.id);
+
+		// Begin transaction
+
+		Transaction transaction = session.beginTransaction();
+
+		// write operations like save/update/delete/query
+
+		if (cred == null) {
+			session.save(credential);
+			message = "Successfully created";
+		} else {
+			message = "Please try again";
+		}
+		// End transaction
+
+		transaction.commit();
+
+		session.close();
+
+		sessionFactory.close();
+		return message;
+	}
+
+	@Override
+	public String updateCredentials(int id, Credential credential) {
+		// Configuration start
+
+		Configuration configure = new Configuration();
+
+		configure.configure();
+
+		SessionFactory sessionFactory = configure.buildSessionFactory();
+
+		Session session = sessionFactory.openSession();
+
+		// write your Logic
+		Credential cred = session.get(Credential.class, id);
+
+		// Begin transaction
+
+		Transaction transaction = session.beginTransaction();
+
+		// write operations like save/update/delete/query
+
+		if (cred != null) {
+			cred.setType(credential.type);
+			cred.setFirstName(credential.firstName);
+			cred.setLastName(credential.lastName);
+			cred.setUsername(credential.username);
+			cred.setEmail(credential.email);
+			cred.setPassword(credential.password);
+
+			session.update(cred);
+			message = "Successfully updated";
+		} else {
+			message = "Please try again";
+		}
+		// End transaction
+
+		transaction.commit();
+
+		session.close();
+
+		sessionFactory.close();
+		return message;
+	}
+
+	@Override
+	public String deleteCredentials(int id) {
+		// Configuration start
+
+		Configuration configure = new Configuration();
+
+		configure.configure();
+
+		SessionFactory sessionFactory = configure.buildSessionFactory();
+
+		Session session = sessionFactory.openSession();
+
+		// write your Logic
+		Credential cred = session.get(Credential.class, id);
+
+		// Begin transaction
+
+		Transaction transaction = session.beginTransaction();
+
+		// write operations like save/update/delete/query
+
+		if (cred == null) {
+			session.delete(cred);
+			message = "Successfully deleted";
+		} else {
+			message = "Please try again";
+		}
+		// End transaction
+
+		transaction.commit();
+
+		session.close();
+
+		sessionFactory.close();
+		return message;
+	}
+
+	@Override
+	public Credential viewCredential(int id) {
+		// Configuration start
+
+		Configuration configure = new Configuration();
+
+		configure.configure();
+
+		SessionFactory sessionFactory = configure.buildSessionFactory();
+
+		Session session = sessionFactory.openSession();
+
+		// write your Logic
+		Credential cred = session.get(Credential.class, id);
+
+		session.close();
+
+		sessionFactory.close();
+		return cred;
+	}
+
+	@Override
+	public List<Credential> viewAllCredentials() {
+		// Configuration start
+
+		Configuration configure = new Configuration();
+
+		configure.configure();
+
+		SessionFactory sessionFactory = configure.buildSessionFactory();
+
+		Session session = sessionFactory.openSession();
+
+		// write your Logic
+
+		// Begin transaction
+
+		Transaction transaction = session.beginTransaction();
+
+		// write operations like save/update/delete/query
+		List<Credential> li =new ArrayList<>();
+		Query<Credential> query = session.createQuery("from Credential");
+		li=query.list();
+		
+		for(Object data:li) {
+			System.out.println(data);
+		}
+		// End transaction
+
+		transaction.commit();
+
+		session.close();
+
+		sessionFactory.close();
+		return li;
+	}
+
+}

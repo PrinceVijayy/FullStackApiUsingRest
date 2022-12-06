@@ -1,0 +1,49 @@
+package com.ojas.rest;
+
+import java.util.List;
+
+import javax.websocket.server.PathParam;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+
+import com.ojas.dao.CredentialDAO;
+import com.ojas.dao.CredentialDAOImpl;
+import com.ojas.model.Credential;
+
+@Path("/credential")
+public class CredentialService {
+		CredentialDAO dao=new CredentialDAOImpl();
+		
+		@POST
+		@Path("/create/{type}/{firstName}/{lastName}/{username}/{email}/{password}")
+		public String createCredential(@PathParam("type")String type,@PathParam("firstName")String firstName,@PathParam("lastName") String lastName,@PathParam("username")String username,@PathParam("email")String email,@PathParam("password")String password) {
+			Credential cred=new Credential(type, firstName, lastName, username, email, password);
+			return dao.createCredentials(cred);
+		}
+		@PUT
+		@Path("/update/{id}/{type}/{firstName}/{lastName}/{username}/{email}/{password}")
+		public String createCredential(@PathParam("id")int id,@PathParam("type")String type,@PathParam("firstName") String firstName,@PathParam("lastName") String lastName,@PathParam("username") String username,@PathParam("email") String email,@PathParam("password") String password) {
+			Credential cred=new Credential(type, firstName, lastName, username, email, password);
+			return dao.updateCredentials(id,cred);
+		}
+		
+		@DELETE
+		@Path("delete/{id}")
+		public String deleteCredential(@PathParam("id") int id) {
+			return dao.deleteCredentials(id);
+		}
+		
+		@GET
+		@Path("view/{id}")
+		public Credential viewCredential(@PathParam("id") int id) {
+			return dao.viewCredential(id);
+		}
+		@GET
+		@Path("/list")
+		public List<Credential> viewAllCredentials(){
+			return dao.viewAllCredentials();
+		}
+}

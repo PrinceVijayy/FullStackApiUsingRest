@@ -1,0 +1,33 @@
+package com.ojas.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "CREDENTIALS")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserCredentials {
+
+	@Id
+	@Column(name = "ID")
+	public int id;
+	@Column(name = "FIRST_NAME")
+	public String firstName;
+	@Column(name = "LAST_NAME")
+	public String lastName;
+	@Column(name = "USERNAME")
+	public String userName;
+	@Column(name = "EMAIL")
+	public String email;
+	@Column(name = "PASSWORD")
+	public String password;
+
+}
