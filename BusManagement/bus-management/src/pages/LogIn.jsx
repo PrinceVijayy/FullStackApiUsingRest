@@ -10,7 +10,7 @@ const LogIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     CredentialServices.getCredential(params.username).then((res) => {
-        obj=res.data;
+       
         console.log(res.data)
         console.log(res.data.username);
     //   if (res.data != null) {
